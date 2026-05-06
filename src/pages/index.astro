@@ -1,0 +1,337 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import { Image } from 'astro:assets';
+import profilePic from '../assets/me.jpg';
+import snakeIcon from '../assets/snake.svg';
+
+const name = "Reptiliana";
+const title = `${name} - Portafolio`;
+const summary = "Desarrolladora Fullstack con experiencia en Angular, .NET y Node.js, enfocada en la contrucción de aplicaciones web escalables y APIs REST. Sólida experiencia en front (Angular, React, Vue, TypeScript) y desarrollo backend con .NET.";
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
+
+const experience = [
+  {
+    company: "Freelance",
+    position: "Fullstack Developer",
+    date: "Junio 2025 – Nov 2025",
+    description: "Desarrollo de aplicaciones web utilizando Vue y AWS (Lambda, Cognito). Implementación de autenticación y gestión de usuarios."
+  },
+  {
+    company: "Techreo",
+    position: "Fullstack Developer",
+    date: "Junio 2022 – Junio 2025",
+    description: "Desarrollo de aplicaciones web para el sector financiero utilizando Angular y .NET (6-8). Optimización de servicios y bases de datos SQL/NoSQL."
+  },
+  {
+    company: "Freelance",
+    position: "Frontend Developer",
+    date: "Marzo 2022 – Junio 2022",
+    description: "Desarrollo y mantenimiento de interfaces responsivas con Angular y React. Integración de animaciones Lottie."
+  },
+  {
+    company: "GQC",
+    position: "Back Developer - Node.js",
+    date: "Agosto 2021 – Marzo 2022",
+    description: "Implementación de microservicios para el cálculo de derivados financieros. Gestión de Redis y microservicios en entornos remotos."
+  }
+];
+
+const skills = [
+  { label: "Frontend", items: ["Angular", "React", "Vue", "TypeScript", "Tailwind"] },
+  { label: "Backend", items: [".NET", "Node.js", "C#", "REST APIs"] },
+  { label: "Cloud", items: ["AWS", "Azure", "Docker", "Nube"] },
+  { label: "Bases de Datos", items: ["MongoDB", "SQL", "Redis"] }
+];
+---
+
+<Layout title={title}>
+  <div class="relative min-h-screen">
+    <!-- Unified Background Atmospheric Elements -->
+    <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+      <div class="glow-blob w-64 h-64 md:w-[600px] md:h-[600px] -top-20 -left-32 md:-left-64"></div>
+      <div class="glow-blob w-48 h-48 md:w-[500px] md:h-[500px] top-[40%] -right-16 md:-right-32" style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);"></div>
+      <div class="glow-blob w-56 h-56 md:w-[400px] md:h-[400px] -bottom-20 -left-10 md:-left-20"></div>
+    </div>
+
+    <header class="max-w-screen-xl mx-auto px-6 py-8 flex justify-between items-center relative z-50">
+      <div class="cursor-default">
+        <Image src={snakeIcon} alt="Snake Logo" class="w-8 h-8" />
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex gap-8 text-sm font-medium text-muted items-center">
+        <a href="#proyectos" class="hover:text-foreground transition-colors">Proyectos</a>
+        <a href="#experiencia" class="hover:text-foreground transition-colors">Experiencia</a>
+        <a href="#habilidades" class="hover:text-foreground transition-colors">Habilidades</a>
+        <ThemeToggle />
+      </nav>
+
+      <!-- Mobile Navigation Toggle -->
+      <div class="flex items-center gap-4 md:hidden">
+        <ThemeToggle />
+        <button 
+          id="mobile-menu-toggle"
+          class="p-2 rounded-xl bg-card text-foreground border border-border shadow-sm flex items-center justify-center w-10 h-10 transition-all active:scale-90"
+          aria-label="Toggle menu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-icon hidden"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div 
+        id="mobile-menu"
+        class="fixed inset-x-6 top-24 bg-card/95 backdrop-blur-xl border border-border rounded-[2rem] p-8 shadow-2xl transition-all duration-300 transform -translate-y-4 opacity-0 pointer-events-none md:hidden z-50"
+      >
+        <nav class="flex flex-col gap-6 text-center text-lg font-bold">
+          <a href="#proyectos" class="mobile-nav-link py-2">Proyectos</a>
+          <a href="#experiencia" class="mobile-nav-link py-2">Experiencia</a>
+          <a href="#habilidades" class="mobile-nav-link py-2">Habilidades</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-screen-xl mx-auto px-6 relative">
+      <!-- Intro Section -->
+      <section class="min-h-[70vh] flex flex-col md:flex-row items-center justify-center gap-12 py-20 relative z-10 reveal">
+        <div class="md:w-3/5 flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1">
+          <h1 class="text-4xl md:text-7xl font-black tracking-tight mb-8 leading-tight flex flex-col items-center md:items-start gap-4">
+            <Image src={snakeIcon} alt="Snake" class="w-12 h-12 md:w-20 md:h-20" />
+            <span>Hola, soy<br />
+            {name}</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-muted leading-relaxed max-w-2xl">
+            {summary}
+          </p>
+        </div>
+        <div class="md:w-1/3 flex justify-center order-1 md:order-2">
+          <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-[3rem] overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-105 bg-card border-4 border-white dark:border-zinc-800 flex items-center justify-center animate-float">
+            <Image 
+              src={profilePic} 
+              alt={name} 
+              class="w-full h-full object-cover" 
+              loading="eager"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="proyectos" class="py-32 relative z-10">
+        <div class="text-center mb-24 reveal">
+          <h2 class="text-5xl font-black mb-6">Proyectos</h2>
+          <p class="text-xl text-muted">Haz clic en una habilidad abajo para filtrar mis proyectos.</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-12">
+          {projects.map((project, index) => (
+            <a 
+              href={`/projects/${project.id}`} 
+              class="block bg-card/80 backdrop-blur-sm border border-border p-8 md:p-14 rounded-[3rem] shadow-sm hover:shadow-xl transition-all relative group reveal"
+              data-tags={project.data.tags.join(',')}
+              style={`transition-delay: ${index * 100}ms`}
+            >
+              <div class="mb-8">
+                <h3 class="text-3xl font-black mb-2 group-hover:text-accent transition-colors" transition:name={`title-${project.id}`}>
+                  {project.data.name}
+                </h3>
+                <p class="text-muted text-sm uppercase tracking-[0.2em] font-bold" transition:name={`category-${project.id}`}>{project.data.category}</p>
+              </div>
+              <p class="text-muted leading-relaxed text-xl">
+                {project.data.summary}
+              </p>
+              <div class="mt-8 flex flex-wrap gap-2">
+                {project.data.tags.map(tag => (
+                  <span class="project-tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Modern Separator Line -->
+      <div class="h-px w-full max-w-2xl mx-auto bg-gradient-to-r from-transparent via-accent/20 to-transparent my-10 relative z-10"></div>
+
+      <!-- Experience Section -->
+      <section id="experiencia" class="py-32 relative z-10">
+        <div class="text-center mb-24 reveal">
+          <h2 class="text-4xl md:text-5xl font-black mb-6">Experiencia</h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-24">
+          {experience.map((item, index) => (
+            <div class="group reveal" style={`transition-delay: ${index * 100}ms`}>
+              <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-6 gap-2">
+                <h3 class="text-2xl md:text-3xl font-black">{item.position} <span class="text-accent">@ {item.company}</span></h3>
+                <p class="text-muted text-sm font-bold uppercase tracking-widest whitespace-nowrap">{item.date}</p>
+              </div>
+              <p class="text-muted leading-relaxed text-lg md:text-xl">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Modern Separator Line -->
+      <div class="h-px w-full max-w-2xl mx-auto bg-gradient-to-r from-transparent via-accent/20 to-transparent my-10 relative z-10"></div>
+
+      <!-- Skills Section -->
+      <section id="habilidades" class="py-32 relative z-10">
+        <div class="text-center mb-24 reveal">
+          <h2 class="text-4xl md:text-5xl font-black mb-6">Habilidades</h2>
+          <p class="text-muted">Selecciona habilidades para ver los proyectos relacionados.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          {skills.map((skill, index) => (
+            <div class="bg-card/80 backdrop-blur-sm border border-border p-8 md:p-10 rounded-[2.5rem] reveal" style={`transition-delay: ${index * 100}ms`}>
+              <h3 class="text-xl md:text-2xl font-black mb-6 text-accent">{skill.label}</h3>
+              <div class="flex flex-wrap gap-3">
+                {skill.items.map(item => (
+                  <button 
+                    class="badge cursor-pointer hover:scale-110 transition-transform active:scale-95"
+                    data-skill={item}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer class="max-w-screen-xl mx-auto px-6 py-32 border-t border-border flex flex-col items-center gap-8 text-muted text-sm font-medium relative z-10 reveal">
+      <div class="flex gap-8 justify-center">
+        <a href="https://github.com/reptiliana" class="hover:text-foreground transition-colors">GitHub</a>
+        <a href="mailto:ru1iziliana.avi@gmail.com" class="hover:text-foreground transition-colors">Email</a>
+      </div>
+      <p class="text-center">© {new Date().getFullYear()} {name}. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+  <script>
+    function setupSmoothScroll() {
+      document.addEventListener('click', (e) => {
+        const link = (e.target as HTMLElement).closest('a');
+        if (link && link.hash && link.origin === window.location.origin && link.pathname === window.location.pathname) {
+          e.preventDefault();
+          const target = document.querySelector(link.hash);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+            history.pushState(null, null, link.hash);
+          }
+        }
+      });
+    }
+
+    function setupFiltering() {
+      document.addEventListener('click', (e) => {
+        const skillBadge = (e.target as HTMLElement).closest('[data-skill]');
+        if (skillBadge) {
+          skillBadge.classList.toggle('active');
+          filterProjects();
+        }
+      });
+    }
+
+    function filterProjects() {
+      const activeSkills = Array.from(document.querySelectorAll('[data-skill].active')).map(el => (el as HTMLElement).dataset.skill);
+      const projects = document.querySelectorAll('[data-tags]');
+      const projectsSection = document.getElementById('proyectos');
+
+      projects.forEach(project => {
+        const tags = (project as HTMLElement).dataset.tags?.split(',') || [];
+        if (activeSkills.length === 0) {
+          project.classList.remove('filter-hidden');
+        } else {
+          const hasMatch = activeSkills.some(skill => skill && tags.includes(skill));
+          if (hasMatch) {
+            project.classList.remove('filter-hidden');
+          } else {
+            project.classList.add('filter-hidden');
+          }
+        }
+      });
+
+      if (activeSkills.length > 0 && projectsSection) {
+        const rect = projectsSection.getBoundingClientRect();
+        if (rect.top > window.innerHeight || rect.bottom < 0) {
+          projectsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+
+    function setupReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+    function setupMobileMenu() {
+      const toggle = document.getElementById('mobile-menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (!toggle || !menu) return;
+
+      const menuIcon = toggle.querySelector('.menu-icon');
+      const closeIcon = toggle.querySelector('.close-icon');
+
+      const closeMenu = () => {
+        menu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+        menu.classList.remove('opacity-100', 'translate-y-0');
+        menuIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+      };
+
+      const openMenu = () => {
+        menu.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+        menu.classList.add('opacity-100', 'translate-y-0');
+        menuIcon?.classList.add('hidden');
+        closeIcon?.classList.remove('hidden');
+      };
+
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = menu.classList.contains('opacity-100');
+        if (isOpen) closeMenu();
+        else openMenu();
+      });
+
+      // Close on link click
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Close on click outside
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target as Node) && !toggle.contains(e.target as Node)) {
+          closeMenu();
+        }
+      });
+    }
+
+    // Initialize on every page load
+    document.addEventListener('astro:page-load', () => {
+      setupSmoothScroll();
+      setupReveal();
+      setupFiltering();
+      setupMobileMenu();
+    });
+  </script>
+</Layout>

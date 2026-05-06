@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-card: var(--card-bg);
+  --color-border: var(--border-color);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+}
+
+@layer base {
+  :root {
+    --dark-mode: class;
+    color-scheme: light;
+    --bg: #ffffff;
+    --fg: #111827;
+    --card-bg: #f9fafb;
+    --border-color: #e5e7eb;
+    --muted: #4b5563;
+    --badge-bg: #f3f4f6;
+    --badge-fg: #374151;
+    --accent: #2563eb;
+  }
+
+  :root.dark {
+    color-scheme: dark;
+    --bg: #000000;
+    --fg: #f9fafb;
+    --card-bg: #111827;
+    --border-color: #1f2937;
+    --muted: #9ca3af;
+    --badge-bg: #1f2937;
+    --badge-fg: #e5e7eb;
+    --accent: #60a5fa;
+  }
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Modern Atmospheric Background Elements */
+.glow-blob {
+  position: absolute;
+  z-index: -10;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  opacity: 0.15;
+}
+
+:root.dark .glow-blob {
+  opacity: 0.25;
+}
+
+.badge {
+  background-color: var(--badge-bg);
+  color: var(--badge-fg);
+  @apply px-4 py-2 rounded-full text-sm font-bold tracking-tight border border-border;
+}
+
+/* Custom Prose Styles for Project Pages */
+.prose h2 {
+  @apply text-3xl font-black mt-16 mb-8;
+}
+.prose ul {
+  @apply space-y-4 list-none pl-0;
+}
+.prose li {
+  @apply text-xl text-muted leading-relaxed relative pl-8;
+}
+.prose li::before {
+  content: "•";
+  @apply absolute left-0 font-bold;
+  color: var(--accent);
+  top: 0.1em;
+}
+
+/* Active Skill Filter Styles */
+[data-skill].active {
+  background-color: var(--accent);
+  @apply text-white border-transparent scale-110 shadow-md;
+}
+
+.filter-hidden {
+  display: none !important;
+}
+
+.project-tag {
+  @apply text-xs font-bold px-3 py-1 rounded-full border;
+  background-color: var(--badge-bg);
+  color: var(--muted);
+  border-color: var(--border-color);
+}
