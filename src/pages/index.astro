@@ -5,6 +5,8 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 import { Image } from 'astro:assets';
 import profilePic from '../assets/me.jpg';
 import snakeIcon from '../assets/snake.svg';
+import secondSnake from '../assets/secondSnake.png';
+import snakePng from '../assets/snake.png';
 
 const name = "Reptiliana";
 const title = `${name} - Portafolio`;
@@ -59,7 +61,7 @@ const skills = [
 
     <header class="max-w-screen-xl mx-auto px-6 py-8 flex justify-between items-center relative z-50">
       <div class="cursor-default">
-        <Image src={snakeIcon} alt="Snake Logo" class="w-8 h-8" />
+        <Image src={snakePng} alt="Snake Logo" class="w-12 h-5" />
       </div>
       
       <!-- Desktop Navigation -->
@@ -101,7 +103,7 @@ const skills = [
       <section class="min-h-[70vh] flex flex-col md:flex-row items-center justify-center gap-12 py-20 relative z-10 reveal">
         <div class="md:w-3/5 flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1">
           <h1 class="text-4xl md:text-7xl font-black tracking-tight mb-8 leading-tight flex flex-col items-center md:items-start gap-4">
-            <Image src={snakeIcon} alt="Snake" class="w-12 h-12 md:w-20 md:h-20" />
+            <Image src={secondSnake} alt="Snake" class="w-12 h-12 md:w-20 md:h-20" />
             <span>Hola, soy<br />
             {name}</span>
           </h1>
